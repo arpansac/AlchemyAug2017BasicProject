@@ -1,0 +1,23 @@
+<h1>Users#index</h1>
+<p>Find me in app/views/users/index.html.erb</p>
+
+
+<% (1..5).each do |i| %>
+
+<%= i %>
+
+<% end %>
+
+<% x = 5 %>
+
+<p>Printing x: <%= x %></p>
+
+<p><%= @name %></p>
+
+
+<% @users.each do |u| %>
+	<p><%= u.name %> &nbsp; 
+		<%= link_to "Delete", "/users/#{u.id}", method: :delete %>
+	</p>
+
+<% end %>

@@ -1,0 +1,77 @@
+<h1>New User Form</h1>
+
+<!-- html form that we coded from scratch -->
+<!-- <form action="/users" method="post">
+
+	<label for="name">Name</label>
+	<input type="text" id="name" name="name">
+	<br>
+
+	<label for="age">Age</label>
+	<input type="number" id="age" name="age">
+
+	<br>
+
+	<label for="email">email</label>
+	<input type="email" id="email" name="email">
+
+	<br>
+
+	<label for="password">Password</label>
+	<input type="password" id="password" name="password">
+
+	<br>
+	<input type="submit" value="Submit">
+
+</form> -->
+
+
+
+<!-- rails form generator, giving @user automatically gives it a route /users -->
+<%= form_for @user do |f| %>
+	
+	<%= f.label :name %>
+	<%= f.text_field :name %>
+
+	<br>
+	<%= f.label :age %>
+	<%= f.number_field :age %>
+
+	<br>
+	<%= f.label :email %>
+	<%= f.email_field :email %>
+
+	<br>
+	<%= f.label :password %>
+	<%= f.password_field :password %>
+
+	<br>
+
+	<%= f.submit %>
+
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

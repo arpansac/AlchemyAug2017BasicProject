@@ -1,0 +1,25 @@
+
+
+<!-- form to update @user object. Controller and action have been explicitly stated because it takes url '/users' by default, we will look at how to do it without stating url-->
+<%= form_for @user, url: url_for(controller: 'users', action: 'update') do |f| %>
+	
+	<%= f.label :name %>
+	<%= f.text_field :name %>
+
+	<br>
+	<%= f.label :age %>
+	<%= f.number_field :age %>
+
+	<br>
+	<%= f.label :email %>
+	<%= f.email_field :email %>
+
+	<br>
+	<%= f.label :password %>
+	<%= f.password_field :password %>
+
+	<br>
+
+	<%= f.submit %>
+
+<% end %>
