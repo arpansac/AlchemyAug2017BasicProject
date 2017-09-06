@@ -18,7 +18,11 @@ class UsersController < ApplicationController
 
 
   # action to receive data from form on new.html.erb
-  def create
+  def create   
+    
+    # we first did it like this
+    # User.create(name: params[:name], age: params[:age].to_i, email: params[:email], password: params[:password])    
+    
     # user params is a private method defined at the bottom
   	User.create(user_params)
 
