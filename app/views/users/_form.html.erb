@@ -1,0 +1,26 @@
+
+<!-- a partial to put the common code used in new.html.erb and edit.html.erb -->
+<h3>User Create/Edit Form from partial _form.html.erb</h3>
+
+<%= form_for @user do |f| %>
+	
+	<%= f.label :name %>
+	<%= f.text_field :name %>
+
+	<br>
+	<%= f.label :age %>
+	<%= f.number_field :age %>
+
+	<br>
+	<%= f.label :email %>
+	<%= f.email_field :email %>
+
+	<br>
+	<%= f.label :password %>
+	<%= f.password_field :password %>
+
+	<br>
+
+	<%= f.submit  :submit%>
+
+<% end %>

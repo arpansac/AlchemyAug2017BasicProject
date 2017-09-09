@@ -1,51 +1,44 @@
 class UsersController < ApplicationController
   
   def index
+    byebug
   	@name = "Alchemy"
-    # initial commands
-    # @users = User.where('age > ?', 20)
-    # @users = User.where(age: 20)
-    # @users = User.where('age > ?', 20)
+  
   	@users = User.all
+
+    # earlier we used cookies, but then that was unsafe
+    # if (!cookies[:user_id].blank?)
+      # so we used session
+    if (!session[:user_id].blank?)
+      @signed_in_user = User.find(session[:user_id])
+    end
   end
 
-  # action to render a page for creating a new user
   def new
-    # we have passed an empty User class object to generate 
-    # the form using rails form generators
   	@user = User.new
   end
 
 
-  # action to receive data from form on new.html.erb
   def create
-    # user params is a private method defined at the bottom
   	User.create(user_params)
 
-
-    # redirects to a specific action
   	redirect_to action: 'index'
   end
 
-  # similar to def new, it renders a page with the form to edit a user
   def edit
-    # params[:id] is a url string parameter (something like /users/10)
   	@user = User.find(params[:id])
 
   end
 
-  # updates the user using .update() method
   def update
   	@user = User.find(params[:id].to_i)
 
-    # user_params just like the .create method
   	@user.update(user_params)
   	@user.save
   	redirect_to action: 'index'
 
   end
 
-  # finds the user from the url parameter :id and destroys it
   def destroy
   	@user = User.find(params[:id].to_i)
   	@user.destroy
@@ -53,14 +46,48 @@ class UsersController < ApplicationController
   end
 
 
+  def sign_in
+
+    # don't display sign in page in case user is already signed in
+    if (!cookies[:user_id].blank?)
+    # if (!session[:user_id].blank?)
+
+      redirect_to action: 'index'
+    end
+
+  end
+
+  def create_session
+    # finding user who has signed in
+    user = User.find_by(
+      email: params[:email],
+      password: params[:password]
+      )
+
+    # if user found then set the session variable (earlier we were
+      # setting cookies)
+    if !user.nil?
+      # cookies[:user_id] = user.id
+      session[:user_id] = user.id
+    end
+
+    redirect_to action: 'index'
+
+  end
+
+  def sign_out
+    # removing the key user_id from session hash
+    # cookies.delete(:user_id)
+    # session.delete(:user_id)
+
+    redirect_to action: 'index'
+  end
+
+
+
   private
-  # this method defines which all fields are allowed/permitted 
-  # for the default .create() and .update() methods so that
-  # an object might be created/updated directly by passing the params
   def user_params
   	params.require(:user).permit(:name, :age, :email, :password)
-    # earlier params was a hash which looked like params = {name: "User1", email: "blah@gmail.com"...}
-    # this now return params[:user] which is = {name: "User1", email: "blah@gmail.com"...}
   end
 
 

@@ -1,6 +1,12 @@
 <h1>Users#index</h1>
 <p>Find me in app/views/users/index.html.erb</p>
 
+<% if !@signed_in_user.blank? %>
+	<h1>Signed In User: <%= @signed_in_user.email %></h1>
+	<p><%= link_to "Sign Out", user_sign_out_path, method: :delete %></p>
+	<%else%>
+	<p><%= link_to "Sign In", user_sign_in_path %></p>
+<% end %>
 
 <% (1..5).each do |i| %>
 
@@ -17,7 +23,21 @@
 
 <% @users.each do |u| %>
 	<p><%= u.name %> &nbsp; 
+		<!-- another way to use link_to using the name of the route -->
+		<%= link_to "Edit", edit_user_path(u.id) %>
 		<%= link_to "Delete", "/users/#{u.id}", method: :delete %>
 	</p>
 
 <% end %>
+
+
+
+
+
+
+
+
+
+
+
+
